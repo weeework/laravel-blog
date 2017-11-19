@@ -19,20 +19,9 @@ Route::get('/about', function() {
     return 'Hi, This about page';
 });
 
-Route::get('/blog', function() {
-   $posts = [
-     ['id' => '1', 'title' => 'Post 1', 'body' => 'Body post in ID 1'],
-       ['id' => '2', 'title' => 'Post 2', 'body' => 'Body post in ID 2'],
-       ['id' => '3', 'title' => 'Post 3', 'body' => 'Body post in ID 3'],
-       ['id' => '4', 'title' => 'Post 4', 'body' => 'Body post in ID 4'],
-   ];
-
-   echo '<ul>';
-   foreach ($posts as $post){
-       echo '<li> <a href="' . route('post.detail', $post['id']) . '" >' . $post['title'] . ' </a></li>';
-   }
-   echo '</ul>';
-});
+Route::get('/blog', 'PostController@index');
+Route::get('/post/create', 'PostController@create');
+Route::post('/post/store', 'PostController@store');
 
 Route::get('/post/{id}', ['as' => 'post.detail', function($id)  {
     echo "Post $id";
